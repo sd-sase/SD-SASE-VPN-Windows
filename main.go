@@ -17,7 +17,6 @@ import (
 	"time"
 
 	"golang.org/x/sys/windows"
-	"golang.zx2c4.com/wireguard/tun"
 
 	"golang.zx2c4.com/wireguard/windows/conf"
 	"golang.zx2c4.com/wireguard/windows/driver"
@@ -319,17 +318,11 @@ func main() {
 		if len(os.Args) != 2 {
 			usage()
 		}
-		var rebootRequiredDriver, rebootRequiredWintun bool
-		var err error
-		rebootRequiredDriver, err = driver.DefaultPool.DeleteDriver()
+		rebootRequired, err := driver.DefaultPool.DeleteDriver()
 		if err != nil {
 			fatal(err)
 		}
-		rebootRequiredWintun, err = tun.WintunPool.DeleteDriver()
-		if err != nil {
-			fatal(err)
-		}
-		if rebootRequiredWintun || rebootRequiredDriver {
+		if rebootRequired {
 			log.Println("A reboot may be required")
 		}
 		return

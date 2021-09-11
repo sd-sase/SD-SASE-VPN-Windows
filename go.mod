@@ -6,10 +6,9 @@ require (
 	github.com/lxn/walk v0.0.0-20210112085537-c389da54e794
 	github.com/lxn/win v0.0.0-20210218163916-a377121e959e
 	golang.org/x/crypto v0.0.0-20210817164053-32db794688a5
-	golang.org/x/net v0.0.0-20210903162142-ad29c8ab022f
-	golang.org/x/sys v0.0.0-20210906170528-6f6e22806c34
+	golang.org/x/net v0.0.0-20210908191846-a5e095526f91
+	golang.org/x/sys v0.0.0-20210910150752-751e447fb3d0
 	golang.org/x/text v0.3.7
-	golang.zx2c4.com/wireguard v0.0.0-20210905140043-2ef39d47540c
 )
 
 replace (

@@ -56,7 +56,7 @@ func cleanupAddressesOnDisconnectedInterfaces(family winipcfg.AddressFamily, add
 	}
 }
 
-func configureInterface(family winipcfg.AddressFamily, conf *conf.Config, luid winipcfg.LUID, clamper mtuClamper) error {
+func configureInterface(family winipcfg.AddressFamily, conf *conf.Config, luid winipcfg.LUID) error {
 	estimatedRouteCount := 0
 	for _, peer := range conf.Peers {
 		estimatedRouteCount += len(peer.AllowedIPs)
@@ -152,9 +152,6 @@ func configureInterface(family winipcfg.AddressFamily, conf *conf.Config, luid w
 	ipif.OtherStatefulConfigurationSupported = false
 	if conf.Interface.MTU > 0 {
 		ipif.NLMTU = uint32(conf.Interface.MTU)
-		if clamper != nil {
-			clamper.ForceMTU(int(ipif.NLMTU))
-		}
 	}
 	if (family == windows.AF_INET && foundDefault4) || (family == windows.AF_INET6 && foundDefault6) {
 		ipif.UseAutomaticMetric = false
